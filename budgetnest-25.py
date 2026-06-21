@@ -14,3 +14,10 @@ def calculate_daily_summary(transactions, date):
     total_expense = sum(v['expense'] for v in daily_data.values())
     balance = total_income - total_expense
     return {'categories': daily_data, 'total_income': round(total_income, 2), 'total_expense': round(total_expense, 2), 'balance': round(balance, 2)}
+
+# === Stage 25: Add daily summary calculations ===
+# Project: BudgetNest
+def calculate_daily_summary(transactions, date):
+    daily_income = sum(t['amount'] for t in transactions if t['date'].split('-')[0] == date and t['type'] == 'income')
+    daily_expense = sum(t['amount'] for t in transactions if t['date'].split('-')[0] == date and t['type'] == 'expense')
+    return {'date': date, 'income': daily_income, 'expense': daily_expense, 'balance_change': daily_income - daily_expense}
